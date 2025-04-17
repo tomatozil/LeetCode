@@ -7,10 +7,7 @@ class Solution:
         right_p = len(s)-1
 
         while left_p < right_p:
-            left_c = s[left_p]
-            right_c = s[right_p]
-            s[left_p] = right_c
-            s[right_p] = left_c
+            s[left_p], s[right_p] = s[right_p], s[left_p]
             left_p += 1
             right_p -= 1
         
