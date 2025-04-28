@@ -18,7 +18,7 @@ class Solution:
                 return int(n1/n2)
         
         for s in tokens:
-            if is_sign(s) and len(stack) >= 2:
+            if is_sign(s):
                 n1 = stack.pop()
                 n2 = stack.pop()
                 ret = cal(n2, n1, s)
