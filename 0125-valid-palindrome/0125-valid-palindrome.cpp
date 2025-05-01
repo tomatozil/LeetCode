@@ -3,18 +3,19 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        int toLower = 32;
-        string from_left;
-        string from_right;
-
-        for (auto c: s) {
-            if (isalnum(c)) {
-                if (c >= 'A' && c <= 'Z')
-                    c += toLower;
-                from_left = from_left + c;
-                from_right = c + from_right;
-            }
+        vector<char> sList;
+        for (char c: s) {
+            if (isalnum(c))
+                sList.push_back(tolower(c));
         }
-        return from_left == from_right;
+
+        int left = 0, right = sList.size()-1;
+        while (left < right) {
+            if (sList[left] != sList[right])
+                return false;
+            left++;
+            right--;
+        }
+        return true;
     }
 };
