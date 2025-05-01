@@ -1,20 +1,26 @@
 class Solution:
     def reverseWords(self, s: str) -> str:
         trim_str = s.strip()
-        output = ""
-        i = len(trim_str)-1
-        while i >= 0:
+        words = []
+        i = 0
+        while i < len(trim_str):
             if trim_str[i] != " ":
                 word = ""
-                while i >= 0 and trim_str[i] != " ":
-                    word = trim_str[i] + word
-                    i -= 1
-                output += word
+                while i < len(trim_str) and trim_str[i] != " ":
+                    word = word + trim_str[i]
+                    i += 1
+                words.append(word)
             else:
-                output += " "
-                while i >= 0 and trim_str[i] == " ":
-                    i -= 1
-        return output
+                while i < len(trim_str) and trim_str[i] == " ":
+                    i += 1
+        
+        left, right = 0, len(words)-1
+        while left < right:
+            words[left], words[right] = words[right], words[left]
+            left += 1
+            right -= 1
+        
+        return ' '.join(words)
             
             
 
