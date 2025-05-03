@@ -1,32 +1,15 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        zero = []
-        left, right = 0, len(nums)-1
-        total = 1
-        while left < right:
-            if nums[left] == 0:
-                zero.append(left)
-            else:
-                total *= nums[left]
-            if nums[right] == 0:
-                zero.append(right)
-            else:
-                total *= nums[right]
-            left += 1
-            right -= 1
+        left = [1] * len(nums)
+        for i in range(1, len(nums)):
+            left[i] = left[i-1] * nums[i-1]
+
+        right = [1] * len(nums)
+        for i in range(len(nums)-1, 0, -1):
+            right[i-1] = right[i] * nums[i]
         
-        if left == right:
-            if nums[left] == 0:
-                zero.append(left)
-            else:
-                total *= nums[left]
+        ret = [1] * len(nums)
+        for i in range(len(nums)):
+            ret[i] = left[i] * right[i]
         
-        if zero:
-            ret = [0] * len(nums)
-            if len(zero) > 1 or len(zero) == len(nums):
-                return ret
-            for z in zero:
-                ret[z] = total
-            return ret
-        else:
-            return [total // x for x in nums]  
+        return ret
