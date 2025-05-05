@@ -8,11 +8,11 @@ class Solution:
                 stack.append(s[i])
             else:
                 sub = ""
-                top = stack.pop()
-                while top != "[":
-                    sub = top + sub
+                while stack and stack[-1] != "[":
                     top = stack.pop()
-                
+                    sub = top + sub
+                stack.pop() # "["" 빼기
+
                 digit = ""
                 while stack and stack[-1].isdigit():
                     top = stack.pop()
